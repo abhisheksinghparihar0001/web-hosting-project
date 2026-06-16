@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: techstore-frontend
+  namespace: techstore-prod
+  labels:
+    app: techstore
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: techstore
+  template:
+    metadata:
+      labels:
+        app: techstore
+    spec:
+      containers:
+      - name: web-server
+        image: techstore-app:v1.0 # Update this with your Dockerhub repo if needed
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 101
+          allowPrivilegeEscalation: false
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 2
+          periodSeconds: 5
