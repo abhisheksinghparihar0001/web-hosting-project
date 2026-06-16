@@ -21,7 +21,7 @@ This project leverages a modern DevOps tech stack to ensure reliability, scalabi
   * Docker is used to package the frontend application along with its NGINX web server into a single, standardized unit called a container. This completely eliminates the "it works on my machine" problem and ensures the application runs identically in development, testing, and production environments.
 
 * **Container Orchestration (Kubernetes & Minikube):**
-  * **Kubernetes (K8s):** Acts as the brain of the infrastructure. It manages the Docker containers, ensures the desired number of application replicas are always running, and provides auto-healing (automatically restarting crashed containers).
+- **Kubernetes (K8s):** An open-source container orchestration platform used to automate deployment, scaling, and management of containerized applications across clusters. It ensures high availability, efficient resource utilization, and reliable application performance.
   * **Minikube:** A local Kubernetes engine that simulates a single-node on-premise cluster, perfect for local development and testing of K8s manifests.
 
 * **Web Server & Routing (NGINX & NGINX Ingress Controller):**
